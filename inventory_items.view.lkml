@@ -37,6 +37,13 @@ view: inventory_items {
     sql: ${sold_date} IS NULL OR ${order_items.returned_raw} IS NOT NULL;;
   }
 
+  measure: number_in_stock {
+    type: sum
+    sql: CASE WHEN ${currently_stocked} THEN 1 ELSE 0 END ;;
+    drill_fields: [id, products.item_name, products.id, order_items.count]
+  }
+
+
   dimension_group: sold {
     type: time
     timeframes: [

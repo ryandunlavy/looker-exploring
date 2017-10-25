@@ -28,6 +28,12 @@ view: user_data {
     sql: ${total_num_orders} <> 0 ;;
   }
 
+  dimension: order_tier {
+    type: tier
+    tiers: [0, 5, 10, 20, 30, 40]
+    style: integer
+  }
+
   measure: count {
     hidden: yes
     type: count

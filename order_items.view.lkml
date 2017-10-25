@@ -39,6 +39,18 @@ view: order_items {
     value_format: "$0.00"
   }
 
+  dimension: returned_flag {
+    type: yesno
+    sql: ${returned_date} IS NOT NULL ;;
+  }
+
+
+  measure: return_rate {
+    type: average
+    sql: CASE WHEN ${returned_raw} IS NULL THEN 0 ELSE 1 END ;;
+    value_format: "0.00%"
+  }
+
   measure: count {
     type: count
     drill_fields: [id, inventory_items.id, orders.id]
@@ -48,25 +60,37 @@ view: order_items {
     type: min
     sql: ${sale_price} ;;
     value_format: "$0.00"
+    drill_fields: [id,  products.id, products.item_name, returned_flag, sale_price]
   }
 
   measure: max_price {
     type: max
     sql: ${sale_price} ;;
     value_format: "$0.00"
+    drill_fields: [id,  products.id, products.item_name, returned_flag, sale_price]
   }
 
   measure: total_price {
     type:  sum
     sql: ${sale_price} ;;
     value_format: "$0.00"
+    drill_fields: [id,  products.id, products.item_name, returned_flag, sale_price]
   }
 
   measure: average_price {
     type: average
     sql: ${sale_price} ;;
     value_format: "$0.00"
+    drill_fields: [id,  products.id, products.item_name, returned_flag, sale_price]
   }
+
+ measure: price_range {
+  type: number
+  sql: ${max_price} - ${min_price} ;;
+  value_format: "$0.00"
+  drill_fields: [id,  products.id, products.item_name, returned_flag, sale_price]
+ }
+
 
 
 }

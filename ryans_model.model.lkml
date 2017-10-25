@@ -53,3 +53,33 @@ explore: order_items {
     relationship: many_to_one
   }
 }
+
+explore: inventory_items{
+  label: "Inventory by category"
+
+  always_filter: {
+    filters: {
+      field: products.category
+      value: "Accessories"
+    }
+  }
+
+  join: products {
+    fields: [id, item_name, brand, category, department, retail_price, sku]
+    sql_on: ${products.id} = ${inventory_items.product_id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+
+  join: order_items {
+    fields: [return_rate]
+    sql_on: ${inventory_items.id} = ${order_items.inventory_item_id} ;;
+    type: left_outer
+    relationship: one_to_many
+  }
+
+
+
+
+
+}
