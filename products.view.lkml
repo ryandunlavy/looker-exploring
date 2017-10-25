@@ -46,4 +46,6 @@ view: products {
     type: count
     drill_fields: [id, item_name, inventory_items.count]
   }
+
+
 }

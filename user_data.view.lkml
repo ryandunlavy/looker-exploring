@@ -24,6 +24,7 @@ view: user_data {
   }
 
   measure: count {
+    hidden: yes
     type: count
     drill_fields: [id, users.last_name, users.first_name, users.id]
   }

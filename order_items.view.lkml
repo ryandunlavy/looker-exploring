@@ -42,4 +42,21 @@ view: order_items {
     type: count
     drill_fields: [id, inventory_items.id, orders.id]
   }
+
+  measure: min_price {
+    type: min
+    sql: ${sale_price} ;;
+  }
+
+  measure: max_price {
+    type: max
+    sql: ${sale_price} ;;
+  }
+
+  measure: total_price {
+    type:  sum
+    sql: ${sale_price} ;;
+  }
+
+
 }
