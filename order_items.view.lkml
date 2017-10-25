@@ -36,6 +36,7 @@ view: order_items {
   dimension: sale_price {
     type: number
     sql: ${TABLE}.sale_price ;;
+    value_format: "$0.00"
   }
 
   measure: count {
@@ -46,16 +47,19 @@ view: order_items {
   measure: min_price {
     type: min
     sql: ${sale_price} ;;
+    value_format: "$0.00"
   }
 
   measure: max_price {
     type: max
     sql: ${sale_price} ;;
+    value_format: "$0.00"
   }
 
   measure: total_price {
     type:  sum
     sql: ${sale_price} ;;
+    value_format: "$0.00"
   }
 
 
