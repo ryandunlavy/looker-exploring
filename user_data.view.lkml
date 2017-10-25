@@ -23,6 +23,11 @@ view: user_data {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: has_ever_ordered {
+    type:  yesno
+    sql: ${total_num_orders} <> 0 ;;
+  }
+
   measure: count {
     hidden: yes
     type: count

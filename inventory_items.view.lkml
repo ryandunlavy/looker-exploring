@@ -28,8 +28,13 @@ view: inventory_items {
 
   dimension: product_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.product_id ;;
+  }
+
+  dimension: currently_stocked {
+    type: yesno
+    sql: ${sold_date} IS NULL OR ${order_items.returned_raw} IS NOT NULL;;
   }
 
   dimension_group: sold {
@@ -45,6 +50,8 @@ view: inventory_items {
     ]
     sql: ${TABLE}.sold_at ;;
   }
+
+
 
   measure: count {
     type: count

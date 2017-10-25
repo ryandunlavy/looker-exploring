@@ -9,13 +9,13 @@ view: order_items {
 
   dimension: inventory_item_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.inventory_item_id ;;
   }
 
   dimension: order_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.order_id ;;
   }
 
@@ -58,6 +58,12 @@ view: order_items {
 
   measure: total_price {
     type:  sum
+    sql: ${sale_price} ;;
+    value_format: "$0.00"
+  }
+
+  measure: average_price {
+    type: average
     sql: ${sale_price} ;;
     value_format: "$0.00"
   }

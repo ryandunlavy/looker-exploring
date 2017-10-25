@@ -1,6 +1,10 @@
 view: users {
   sql_table_name: demo_db.users ;;
 
+dimension: full_name {
+  sql: CONCAT(${first_name}, ' ', ${last_name}) ;;
+}
+
   dimension: id {
     primary_key: yes
     type: number
@@ -71,6 +75,16 @@ view: users {
     type: count
     drill_fields: [detail*]
   }
+
+  measure: over_30_count {
+    type: count
+    filters: {
+      field: age
+      value: "> 30"
+    }
+    drill_fields: [detail*]
+  }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {

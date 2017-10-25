@@ -16,29 +16,29 @@ explore: users {
   join: user_data {
     sql_on: ${users.id} = ${user_data.user_id} ;;
     type: inner
-    relationship: one_to_one
+    relationship: many_to_one
     view_label: "Users"
   }
 
 }
 
-explore: orders_2017 {
-  from: order_items
+explore: order_items {
+  label: "2017 Orders"
 
-  sql_always_where: ${orders.created_date} >= '01-01-2017' ;;
+  sql_always_where: ${orders.created_date} > '2017-01-01' ;;
 
   persist_with: orders_update
 
-  join: orders {
-    sql_on: ${orders.id} = ${orders_2017.order_id} ;;
-    type: left_outer
-    relationship: many_to_one
-  }
-
   join: inventory_items {
-    sql_on: ${inventory_items.id} = ${orders_2017.inventory_item_id} ;;
+    sql_on: ${inventory_items.id} = ${order_items.inventory_item_id} ;;
     type: left_outer
     relationship: many_to_many
+  }
+
+  join: orders {
+    sql_on: ${orders.id} = ${order_items.order_id} ;;
+    type: left_outer
+    relationship: many_to_one
   }
 
   join: products {
