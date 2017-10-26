@@ -37,6 +37,24 @@ view: inventory_items {
     sql: ${sold_date} IS NULL OR ${order_items.returned_raw} IS NOT NULL;;
   }
 
+  dimension: status {
+    case: {
+      when: {
+        sql: ${sold_date} IS NULL ;;
+        label: "not sold"
+      }
+      when: {
+        sql: ${order_items.returned_raw} IS NULL ;;
+        label: "sold"
+      }
+      when: {
+        sql: ${order_items.returned_raw} IS NOT NULL ;;
+        label: "returned"
+      }
+      else: "unknown"
+    }
+  }
+
   measure: number_in_stock {
     type: sum
     sql: CASE WHEN ${currently_stocked} THEN 1 ELSE 0 END ;;

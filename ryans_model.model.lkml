@@ -52,7 +52,16 @@ explore: order_items {
     type:  left_outer
     relationship: many_to_one
   }
+
+  join: user_data {
+    sql_on: ${users.id} = ${user_data.user_id} ;;
+    type: inner
+    relationship: many_to_one
+    view_label: "Users"
+  }
 }
+
+
 
 explore: inventory_items{
   label: "Inventory by category"
