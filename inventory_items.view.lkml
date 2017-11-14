@@ -37,6 +37,16 @@ view: inventory_items {
     sql: ${sold_date} IS NULL OR ${order_items.returned_raw} IS NOT NULL;;
   }
 
+  dimension: just_var {
+    type: yesno
+    sql: ${currently_stocked} ;;
+  }
+
+  dimension: with_equals_yes {
+    type: yesno
+    sql: ${currently_stocked} = "Yes" ;;
+  }
+
   dimension: status {
     case: {
       when: {

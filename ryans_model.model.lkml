@@ -6,9 +6,20 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+
+
 datagroup: orders_update {
   sql_trigger: SELECT MAX(created) FROM orders ;;
   max_cache_age: "4 hours"
+}
+
+explore: orders {
+
+  join: user_facts_pdt {
+    sql_on: ${orders.user_id} = ${user_facts_pdt.user_id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
 }
 
 explore: users {
