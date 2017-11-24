@@ -6,7 +6,7 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
-
+label: "test label"
 
 datagroup: orders_update {
   sql_trigger: SELECT MAX(created) FROM orders ;;
