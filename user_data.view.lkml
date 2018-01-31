@@ -1,6 +1,8 @@
 view: user_data {
   sql_table_name: demo_db.user_data ;;
 
+
+
   dimension: id {
     primary_key: yes
     type: number
@@ -23,6 +25,12 @@ view: user_data {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: user_id_2 {
+    type: string
+    # hidden: yes
+    sql: to_char(${TABLE}.user_id, '999') ;;
+  }
+
   dimension: has_ever_ordered {
     label: "Has placed an order"
     description: "Says 'yes' when the user has ever placed an order, 'no' when the user has never placed an order"
@@ -40,12 +48,19 @@ view: user_data {
     sql: ${total_num_orders} ;;
   }
 
-  measure: number_of_orders {
-    label: "Total Order Count"
-    description: "Total number of orders from the users"
+  dimension: orders {
+    type: number
+    sql: ${total_num_orders} ;;
+  }
+
+  measure: rders {
     type: sum
     sql: ${total_num_orders} ;;
-    drill_fields: [order_tier, total_num_orders]
+  }
+
+  measure: test {
+    type: number
+    sql: ${user_data.orders}/${max_num_orders};;
   }
 
 

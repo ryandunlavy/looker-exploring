@@ -47,5 +47,10 @@ view: products {
     drill_fields: [id, item_name, inventory_items.count]
   }
 
+  measure: measure_test {
+    type: number
+    sql: 1.0*${count}/${rank} ;;
+  }
+
 
 }

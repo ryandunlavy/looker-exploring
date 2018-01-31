@@ -3,8 +3,15 @@ view: orders {
 
   dimension: id {
     primary_key: yes
+    hidden: yes
     type: number
     sql: ${TABLE}.id ;;
+  }
+
+  dimension: date_string {
+    type: string
+    sql: DATE_FORMAT(${TABLE}.created_at, "%m-%d-%y") ;;
+    html: <td nowrap>{{ value}}</td> ;;
   }
 
   dimension_group: created {
@@ -19,6 +26,12 @@ view: orders {
       year
     ]
     sql: ${TABLE}.created_at ;;
+    #html: <span style="white-space: nowrap">{{ linked_value }}</span> ;;
+  }
+
+  dimension: day {
+    type: date
+    sql: DATE(${TABLE}.created_at) ;;
   }
 
   dimension: status {
@@ -35,5 +48,6 @@ view: orders {
   measure: order_count {
     type: count
     drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count]
+    #html: <p style="font-size:100px">{{ value}}</p> ;;
   }
 }
