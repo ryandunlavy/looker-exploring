@@ -20,6 +20,7 @@ view: order_items {
   }
 
   dimension_group: returned {
+    label: "A1"
     type: time
     timeframes: [
       raw,

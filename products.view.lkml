@@ -15,6 +15,7 @@ view: products {
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
+    suggest_dimension: brand #test
   }
 
   dimension: department {

@@ -76,8 +76,16 @@ explore: order_items {
     relationship: many_to_one
     view_label: "Users"
   }
+
+  join: ndt {
+    sql_on: ${ndt.user_id}=${user_data.user_id} ;;
+    type: left_outer
+    relationship: many_to_one
+
+  }
 }
 
+explore: ndt {}
 
 explore: products {}
 
