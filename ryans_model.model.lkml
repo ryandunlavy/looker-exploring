@@ -19,6 +19,7 @@ explore: inv_extended {
 explore: test123 {}
 
 
+
 explore: orders {
   join: inventory_items {
     sql_on: ${inventory_items.date_string} = ${orders.date_string};;

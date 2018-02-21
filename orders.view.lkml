@@ -29,6 +29,21 @@ view: orders {
     #html: <span style="white-space: nowrap">{{ linked_value }}</span> ;;
   }
 
+  dimension_group: current {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: CURRENT_TIMESTAMP ;;
+    #html: <span style="white-space: nowrap">{{ linked_value }}</span> ;;
+  }
+
   dimension: day {
     type: date
     sql: DATE(${TABLE}.created_at) ;;
@@ -46,6 +61,12 @@ view: orders {
   }
 
   measure: order_count {
+    type: count
+    drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count]
+    #html: <p style="font-size:100px">{{ value}}</p> ;;
+  }
+
+  measure: order_count1 {
     type: count
     drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count]
     #html: <p style="font-size:100px">{{ value}}</p> ;;
