@@ -16,7 +16,7 @@ explore: inv_extended {
   fields: [ALL_FIELDS*, -inv_extended.test_set*]
 }
 
-explore: test123 {}
+explore: zendesk_data {}
 
 
 
