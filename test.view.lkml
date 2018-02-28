@@ -57,6 +57,18 @@ view: test  {
     type: string
   }
 
+  parameter: test_param {
+    allowed_value: {
+      label: "USD"
+      value: "usd"
+    }
+    allowed_value: {
+      label: "GDP"
+      value: "gdp"
+    }
+  }
+
+
 
   dimension: some_num {
     type: number
