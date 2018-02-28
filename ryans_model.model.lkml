@@ -5,8 +5,7 @@ include: "*.view"
 
 # include all the dashboards
 include: "*.dashboard"
-###testy test test
-#This is on test branch
+
 datagroup: orders_update {
   sql_trigger: SELECT MAX(created) FROM orders ;;
   max_cache_age: "4 hours"
