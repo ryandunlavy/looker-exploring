@@ -5,20 +5,27 @@ include: "*.view"
 
 # include all the dashboards
 include: "*.dashboard"
-
-
-
+##This is dev branch
+##
 datagroup: orders_update {
   sql_trigger: SELECT MAX(created) FROM orders ;;
   max_cache_age: "4 hours"
 }
 
-explore: orders {
+explore: inv_extended {
+  fields: [ALL_FIELDS*, -inv_extended.test_set*]
+}
 
-  join: user_facts_pdt {
-    sql_on: ${orders.user_id} = ${user_facts_pdt.user_id} ;;
+explore: zendesk_data {}
+
+###Added comment
+
+
+explore: orders {
+  join: inventory_items {
+    sql_on: ${inventory_items.date_string} = ${orders.date_string};;
     type: left_outer
-    relationship: many_to_one
+    relationship: many_to_many
   }
 }
 
@@ -27,6 +34,7 @@ explore: users {
   join: user_data {
     sql_on: ${users.id} = ${user_data.user_id} ;;
     type: inner
+    fields: []
     relationship: many_to_one
     view_label: "Users"
   }
@@ -70,9 +78,18 @@ explore: order_items {
     relationship: many_to_one
     view_label: "Users"
   }
+
+  join: ndt {
+    sql_on: ${ndt.user_id}=${user_data.user_id} ;;
+    type: left_outer
+    relationship: many_to_one
+
+  }
 }
 
+explore: ndt {}
 
+explore: products {}
 
 explore: inventory_items{
   label: "Inventory by category"
@@ -97,9 +114,6 @@ explore: inventory_items{
     type: left_outer
     relationship: one_to_many
   }
-
-
-
 
 
 }

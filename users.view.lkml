@@ -16,6 +16,11 @@ dimension: full_name {
     sql: ${TABLE}.age ;;
   }
 
+  measure: sumage {
+    type: yesno
+    sql: CASE WHEN SUM(${age}) > 100 THEN TRUE ELSE FALSE END ;;
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
@@ -72,10 +77,7 @@ dimension: full_name {
     sql: ${TABLE}.zip ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+
 
   measure: over_30_count {
     type: count

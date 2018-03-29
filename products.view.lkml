@@ -15,6 +15,7 @@ view: products {
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
+    suggest_dimension: brand #test
   }
 
   dimension: department {
@@ -45,6 +46,11 @@ view: products {
   measure: count {
     type: count
     drill_fields: [id, item_name, inventory_items.count]
+  }
+
+  measure: measure_test {
+    type: number
+    sql: 1.0*${count}/${rank} ;;
   }
 
 

@@ -20,6 +20,7 @@ view: order_items {
   }
 
   dimension_group: returned {
+    label: "A1"
     type: time
     timeframes: [
       raw,
@@ -32,6 +33,21 @@ view: order_items {
     ]
     sql: ${TABLE}.returned_at ;;
   }
+
+  dimension: dummy_two {
+    label: "A1 Month"
+    case: {
+      when: {
+        label: "Highest Priced Item"
+        sql: 1=1 ;;
+      }
+      when: {
+        label: "Average Price"
+        sql: 1=1 ;;
+      }
+    }
+    }
+
 
   dimension: sale_price {
     type: number
