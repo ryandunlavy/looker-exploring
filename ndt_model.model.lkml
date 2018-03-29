@@ -18,6 +18,8 @@ explore: order_items2 {
     relationship: many_to_many
   }
 
+  #will this stay??
+
   join: orders {
     sql_on: ${orders.id} = ${order_items2.order_id} ;;
     type: left_outer
