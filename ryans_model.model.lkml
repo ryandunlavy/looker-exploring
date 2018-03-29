@@ -27,6 +27,8 @@ explore: self_join {
 
 ###Added comment
 
+###Commend added as developer
+
 
 explore: orders {
   join: inventory_items {
