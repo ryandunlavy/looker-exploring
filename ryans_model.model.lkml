@@ -15,7 +15,15 @@ explore: inv_extended {
   fields: [ALL_FIELDS*, -inv_extended.test_set*]
 }
 
-explore: zendesk_data {}
+explore: self_join {
+  from: orders
+  join: orders {
+    view_label: "Self Join"
+    from: orders
+    sql_on: ${orders.id} =${self_join.id};;
+    relationship: many_to_one
+  }
+}
 
 
 
@@ -25,6 +33,16 @@ explore: orders {
     type: left_outer
     relationship: many_to_many
   }
+}
+
+explore: users2 {
+  from: users
+  join: user_facts_pdt {
+    sql_on: ${users2.id} = ${user_facts_pdt.user_id} ;;
+    type: left_outer
+    relationship: one_to_one
+  }
+
 }
 
 explore: users {

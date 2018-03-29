@@ -9,9 +9,7 @@ include: "ndt.view"
 explore: order_items2 {
   hidden: yes
   from: order_items
-  label: "2017 Orders"
-
-  sql_always_where: ${orders.created_date} > '2017-01-01' ;;
+  label: "Orders"
 
 
   join: inventory_items {

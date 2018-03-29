@@ -1,8 +1,25 @@
 view: users {
-  sql_table_name: demo_db.users ;;
+  derived_table: {
+    sql: SELECT * FROM {% if users.table_name._is_filtered %}
+    ${user_facts_pdt.SQL_TABLE_NAME}
+{% else %}
+  demo_db.users
+{% endif %} ;;
+  }
+
+
+  parameter: table_name {
+    type: string
+  }
+
 
 dimension: full_name {
   sql: CONCAT(${first_name}, ' ', ${last_name}) ;;
+}
+
+dimension: in_query {
+  type: number
+  sql: ${TABLE}.in_query ;;
 }
 
   dimension: id {

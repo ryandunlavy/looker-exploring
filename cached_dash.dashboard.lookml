@@ -61,7 +61,3 @@
       num_rows: 0
     series_labels:
       order_items.order_id: Other label
-    row: 0
-    col: 0
-    width: 8
-    height: 6

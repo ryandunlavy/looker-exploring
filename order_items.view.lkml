@@ -59,6 +59,11 @@ view: order_items {
     type: yesno
     sql: ${returned_date} IS NOT NULL ;;
   }
+  dimension: yesno_count {
+    type: number
+    sql: CASE WHEN ${returned_date} THEN (SELECT COUNT(*) FROM  demo_db.order_items WHERE ${returned_flag})
+              ELSE (SELECT COUNT(*) FROM  demo_db.order_items WHERE NOT ${returned_flag}) END;;
+  }
 
 
   measure: return_rate {
@@ -95,6 +100,11 @@ view: order_items {
     sql: ${sale_price} ;;
     value_format: "$#,##0.00"
     drill_fields: [id,  products.id, products.item_name, returned_flag, sale_price]
+  }
+
+  measure: big_ass_number {
+    type:  number
+    sql: ${total_price}*100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 ;;
   }
 
   measure: average_price {

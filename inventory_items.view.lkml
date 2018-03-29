@@ -19,6 +19,8 @@ view: inventory_items {
   dimension: date_string {
     type: string
     sql: DATE_FORMAT(${TABLE}.created_at, "%m-%d-%y") ;;
+    html: <a target="new" href="https://www.google.com/">link</a>;;
+
   }
 
   dimension_group: created {
@@ -39,6 +41,11 @@ view: inventory_items {
     type: number
     hidden: yes
     sql: ${TABLE}.product_id ;;
+  }
+
+  filter: subselect_filter {
+    type: number
+    sql: ${id} IN (SELECT id FROM demo_db.inventory_items WHERE {% condition subselect_filter %} ${product_id} {% endcondition %}) ;;
   }
 
 #   dimension: currently_stocked {
