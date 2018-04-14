@@ -19,6 +19,25 @@ view: order_items {
     sql: ${TABLE}.order_id ;;
   }
 
+  measure: bigger_number {
+    type: number
+    sql: ${commas}*1000 ;;
+    value_format: "0"
+    drill_fields: [commas,returned_date,inventory_item_id]
+  }
+
+  measure: commas {
+    type: count_distinct
+    sql: ${id},${inventory_item_id},${sale_price} ;;
+  }
+
+  measure: inventory_count {
+    type: count_distinct
+    sql: ${inventory_item_id} ;;
+  }
+
+
+
   dimension_group: returned {
     label: "A1"
     type: time

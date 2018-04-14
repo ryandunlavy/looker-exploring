@@ -1,18 +1,59 @@
 view: user_data {
   sql_table_name: demo_db.user_data ;;
 
-
-
   dimension: id {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
   }
 
+
+  filter: yesno_filter {
+    type: yesno
+    sql: {% condition yesno_filter %} ${more_than_5_orders} {% endcondition %}  ;;
+  }
+
+  measure: money {
+    type: sum
+    html: {% assign var=_filters['dynamic_parameter'] %}{{var}}{{rendered_value}};;
+    sql: ${total_num_orders} ;;
+    value_format: "0.00"
+  }
+
+  dimension: other_view {
+    sql: ${user_test.full_name} ;;
+  }
+
+  parameter: dynamic_parameter {
+    type: unquoted
+    allowed_value: {
+      label: "Pound"
+      value: "&pound;"
+    }
+    allowed_value: {
+      label: "Euro"
+      value: "&euro;"
+    }
+  }
+
+  dimension: param_value {
+    #hidden: yes
+    type: string
+    sql: {% parameter dynamic_parameter %} ;;
+  }
+
+  dimension: more_than_5_orders{
+    type: yesno
+    sql: ${total_num_orders} > 5 ;;
+  }
+
+
+
   dimension: max_num_orders {
     type: number
     sql: ${TABLE}.max_num_orders ;;
   }
+
 
   dimension: total_num_orders {
     type: number

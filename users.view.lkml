@@ -1,17 +1,21 @@
 view: users {
   derived_table: {
-    sql: SELECT * FROM {% if users.table_name._is_filtered %}
-    ${user_facts_pdt.SQL_TABLE_NAME}
-{% else %}
-  demo_db.users
-{% endif %} ;;
+    sql: SELECT '{{ _filters['users.param'] }}' AS string;;
   }
 
 
-  parameter: table_name {
+  parameter: param {
     type: string
+    allowed_value: {
+      label: "string with underscores"
+      value: "string_with_underscores"
+    }
   }
 
+  dimension: string {
+    type: string
+    sql: ${TABLE}.string ;;
+  }
 
 dimension: full_name {
   sql: CONCAT(${first_name}, ' ', ${last_name}) ;;
