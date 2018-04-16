@@ -12,6 +12,8 @@ view: user_facts_pdt {
       FROM orders
       GROUP BY user_id
       ;;
+    persist_for: "5 minutes"
+    indexes: ["user_id"]
   }
 
 

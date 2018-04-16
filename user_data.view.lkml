@@ -15,13 +15,14 @@ view: user_data {
 
   measure: money {
     type: sum
-    html: {% assign var=_filters['dynamic_parameter'] %}{{var}}{{rendered_value}};;
+    #html: {% assign var=_filters['dynamic_parameter'] %}{{var}}{{rendered_value}};;
     sql: ${total_num_orders} ;;
+    drill_fields: [yesno_filter, orders, rders]
     value_format: "0.00"
   }
 
   dimension: other_view {
-    sql: ${user_test.full_name} ;;
+    sql: 1 ;;
   }
 
   parameter: dynamic_parameter {
@@ -97,12 +98,16 @@ view: user_data {
   measure: rders {
     type: sum
     sql: ${total_num_orders} ;;
+    drill_fields: [order_tier]
   }
+
 
   measure: test {
     type: number
     sql: ${user_data.orders}/${max_num_orders};;
   }
+
+
 
 
   measure: count {
