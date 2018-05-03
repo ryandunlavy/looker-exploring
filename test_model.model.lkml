@@ -23,11 +23,35 @@ include: "*.view"
 #     relationship: many_to_many
 #   }
 # }
-explore: user_test {
-  from: users
-  join: user_data {
-    sql_on: ${user_test.id} = ${user_data.user_id} ;;
-    relationship: many_to_one
+# explore: user_test {
+#   from: users
+#   join: data {
+#     from: user_data
+#     sql_on: ${user_test.id} = ${data.user_id} ;;
+#     relationship: many_to_one
+#   }
+# }
+
+explore: liquid_madness {}
+
+explore: test1 {
+}
+view: test1 {
+  derived_table: {
+    sql: SELECT "test, test" AS test
+         UNION
+        SELECT "test test" AS test;;
+  }
+  dimension: test {
+    sql: ${TABLE}.test ;;
+  }
+
+  measure: count {
+    type: count
+    filters: {
+      field: test1.test
+      value: "%^,%"
+    }
   }
 }
 explore: parent_pdt {}
