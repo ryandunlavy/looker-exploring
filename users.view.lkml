@@ -14,6 +14,7 @@ view: users {
 
   dimension: string {
     type: string
+    #test
     sql: ${TABLE}.string ;;
   }
 
