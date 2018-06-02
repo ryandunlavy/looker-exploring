@@ -1,10 +1,18 @@
 view: products {
-  sql_table_name: demo_db.products ;;
+  derived_table: {
+    #sql: SELECT * FROM demo_db.products WHERE ({{ _filters['products.field_list'] | | replace: ",", "+" }}) > 0 ;;
+    sql: {% assign fields = _filters['products.field_list'] | replace: '^', '' | replace: '"', '' | replace: ',', '+' %}
+SELECT * FROM demo_db.products WHERE ({{ fields }})  > 0 ;;
+  }
 
   dimension: id {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+  }
+
+  parameter: field_list {
+    type: string
   }
 
   dimension: brand {

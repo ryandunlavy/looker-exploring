@@ -3,6 +3,10 @@ connection: "thelook"
 # include all the views
 include: "*.view"
 
+explore: simple_pdt {}
+
+explore: products {}
+explore: inventory_items {}
 
 # datagroup: orders_update {
 #   sql_trigger: SELECT MAX(created) FROM orders ;;
@@ -32,7 +36,7 @@ include: "*.view"
 #   }
 # }
 
-explore: liquid_madness {}
+#explore: liquid_madness {}
 
 explore: test1 {
 }

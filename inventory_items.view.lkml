@@ -7,11 +7,15 @@ view: inventory_items {
 
   dimension: id {
     primary_key: yes
+    view_label: "money"
+    group_label: "mulah"
     type: number
     sql: ${TABLE}.id ;;
   }
 
   dimension: cost {
+    view_label: "money"
+    group_label: "mulah"
     type: number
     sql: ${TABLE}.cost ;;
   }
