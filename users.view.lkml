@@ -99,10 +99,6 @@ dimension: in_query {
     sql: ${TABLE}.zip ;;
   }
 
-  dimension: other_view {
-    type: string
-    sql:  ${data.other_view} ;;
-  }
 
 
 

@@ -14,6 +14,7 @@ view: inventory_items {
   dimension: cost {
     type: number
     sql: ${TABLE}.cost ;;
+    value_format: "0"
   }
 
   dimension: date_string {

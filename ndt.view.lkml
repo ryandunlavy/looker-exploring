@@ -1,4 +1,4 @@
-include: "ndt_model.model"
+#include: "ndt_model.model"
 
 view: ndt {
   derived_table: {
