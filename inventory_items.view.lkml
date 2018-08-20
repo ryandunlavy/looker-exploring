@@ -13,6 +13,7 @@ view: inventory_items {
     sql: ${TABLE}.id ;;
   }
 
+
   dimension: cost {
     view_label: "money"
     group_label: "mulah"
