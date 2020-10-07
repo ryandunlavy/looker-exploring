@@ -53,6 +53,7 @@ dimension: in_query {
     type: string
     sql: "nowhere dot com" ;;
     link: {
+      label: "click me"
       url: "https://www.google.com"
 
     }
