@@ -1,9 +1,9 @@
 connection: "thelook"
 #really testing
-#
-# # include all the views
-# include: "*.view"
-#
+
+# include all the views
+include: "*.view"
+
 # # include all the dashboards
 # include: "*.dashboard"
 #
@@ -51,17 +51,17 @@ connection: "thelook"
 #
 # }
 #
-# explore: users {
-# #
-# #   join: user_data {
-# #     sql_on: ${users.id} = ${user_data.user_id} ;;
-# #     type: inner
-# #     fields: []
-# #     relationship: many_to_one
-# #     view_label: "Users"
-# #   }
-#
-# }
+explore: users {
+
+  join: user_data {
+    sql_on: ${users.id} = ${user_data.user_id} ;;
+    type: inner
+    fields: []
+    relationship: many_to_one
+    view_label: "Users"
+  }
+
+}
 #
 # explore: order_items {
 #   label: "2017 Orders"

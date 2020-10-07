@@ -1,16 +1,4 @@
 view: users {
-  derived_table: {
-    sql: SELECT '{{ _filters['users.param'] }}' AS string;;
-  }
-
-
-  parameter: param {
-    type: string
-    allowed_value: {
-      label: "string with underscores"
-      value: "string_with_underscores"
-    }
-  }
 
   dimension: string {
     type: string
@@ -37,6 +25,40 @@ dimension: in_query {
     type: number
     sql: ${TABLE}.age ;;
   }
+
+  dimension: filter_test {
+    label: "filter test"
+    type: string
+    case: {
+      when: {
+        label: "option one"
+        sql: ${age} = 25 ;;
+      }
+      when: {
+        label: "option two"
+        sql: ${age} = 30 ;;
+      }
+    }
+  }
+
+  dimension: transaction_place_group_desc {
+    label:  "   Transaction Place Group"
+    suggest_persist_for: "24 hours"
+    description: "On Street: City name ,Parking Lot: Vendor name"
+    type: string
+    sql: ${TABLE}.city ;;
+  }
+
+  dimension: link_test {
+    type: string
+    sql: "nowhere dot com" ;;
+    link: {
+      url: "https://www.google.com"
+
+    }
+  }
+
+
 
   measure: sumage {
     type: yesno
