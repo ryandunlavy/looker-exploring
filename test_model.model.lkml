@@ -13,3 +13,5 @@ explore: inventory_items {}
 explore: parent_pdt {}
 
 explore: user_data {}
+
+explore: users {}

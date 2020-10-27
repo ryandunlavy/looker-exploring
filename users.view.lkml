@@ -122,6 +122,32 @@ dimension: in_query {
     sql: ${TABLE}.zip ;;
   }
 
+  parameter: allowed_vals {
+    type: unquoted
+    allowed_value: {
+      label: "yes"
+      value: "1"
+    }
+    allowed_value: {
+      label: "No"
+      value: "2"
+    }
+    # allowed_value: {
+    #   label: "Maybe"
+    #   value: "3"
+    # }
+    # allowed_value: {
+    #   label: "Just Maybe"
+    #   value: "4"
+    # }
+  }
+
+  measure: nonsense_total {
+    type: sum
+    sql: case when  {%  parameter allowed_vals ==2  %}=2 then ${id}
+              when  {%  parameter allowed_vals ==1  %}=1 then ${id} end ;;
+    value_format: "[>=1000000]$0.00,,\"M\";[>=1000]$0.00,\"K\";$0.00"
+  }
 
 
 
