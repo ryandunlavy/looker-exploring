@@ -142,6 +142,19 @@ dimension: in_query {
     # }
   }
 
+  parameter: no_allowed_vals {
+    type: unquoted
+    }
+
+  measure: nonsense_total_two {
+    type: sum
+    sql: case when  {%  parameter no_allowed_vals ==2  %}=2 then ${id}
+      when  {%  parameter no_allowed_vals ==1  %}=1 then ${id} end ;;
+    value_format: "[>=1000000]$0.00,,\"M\";[>=1000]$0.00,\"K\";$0.00"
+  }
+
+
+
   measure: nonsense_total {
     type: sum
     sql: case when  {%  parameter allowed_vals ==2  %}=2 then ${id}
