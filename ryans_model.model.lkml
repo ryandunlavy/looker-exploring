@@ -51,6 +51,8 @@ include: "*.view"
 #
 # }
 #
+
+explore: multi_series_bug {}
 explore: users {
 
   join: user_data {

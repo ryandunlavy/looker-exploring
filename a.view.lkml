@@ -1,69 +1,19 @@
-view: a {
-  # # You can specify the table name if it's different from the view name:
-  # sql_table_name: my_schema_name.tester ;;
-  #
-  # # Define your dimensions and measures here, like this:
-  # dimension: user_id {
-  #   description: "Unique ID for each user that has ordered"
-  #   type: number
-  #   sql: ${TABLE}.user_id ;;
-  # }
-  #
-  # dimension: lifetime_orders {
-  #   description: "The total number of orders for each user"
-  #   type: number
-  #   sql: ${TABLE}.lifetime_orders ;;
-  # }
-  #
-  # dimension_group: most_recent_purchase {
-  #   description: "The date when each user last ordered"
-  #   type: time
-  #   timeframes: [date, week, month, year]
-  #   sql: ${TABLE}.most_recent_purchase_at ;;
-  # }
-  #
-  # measure: total_lifetime_orders {
-  #   description: "Use this for counting lifetime orders across many users"
-  #   type: sum
-  #   sql: ${lifetime_orders} ;;
-  # }
+view: multi_series_bug {
+  derived_table: {
+    sql:  SELECT 'A' AS label, 1000 AS col_1, -1 AS col_2
+          UNION ALL SELECT 'B', 800, -2
+          UNION ALL SELECT 'C', 1300, -3
+          UNION ALL SELECT 'D', 1400, -2
+          UNION ALL SELECT 'E', 1250, -1
+    ;;
+  }
+  dimension: label {}
+  measure: col_1 {type:sum sql: ${TABLE}.col_1;; label:"Positive Values"}
+  measure: col_2 {type:sum sql: ${TABLE}.col_2;; label:"Negative Values"}
 }
 
-# view: a {
-#   # Or, you could make this view a derived table, like this:
-#   derived_table: {
-#     sql: SELECT
-#         user_id as user_id
-#         , COUNT(*) as lifetime_orders
-#         , MAX(orders.created_at) as most_recent_purchase_at
-#       FROM orders
-#       GROUP BY user_id
-#       ;;
-#   }
-#
-#   # Define your dimensions and measures here, like this:
-#   dimension: user_id {
-#     description: "Unique ID for each user that has ordered"
-#     type: number
-#     sql: ${TABLE}.user_id ;;
-#   }
-#
-#   dimension: lifetime_orders {
-#     description: "The total number of orders for each user"
-#     type: number
-#     sql: ${TABLE}.lifetime_orders ;;
-#   }
-#
-#   dimension_group: most_recent_purchase {
-#     description: "The date when each user last ordered"
-#     type: time
-#     timeframes: [date, week, month, year]
-#     sql: ${TABLE}.most_recent_purchase_at ;;
-#   }
-#
-#   measure: total_lifetime_orders {
-#     description: "Use this for counting lifetime orders across many users"
-#     type: sum
-#     sql: ${lifetime_orders} ;;
-#   }
-# }
+# ACTUAL
+# https://lookerv78.dev.looker.com/explore/model/multi_series_bug?qid=R8i93PYNqb8HLlkWX3QrIf&toggle=vis
+
+# DESIRED
+# https://lookerv78.dev.looker.com/explore/model/multi_series_bug?qid=VTzHZLeFBlk9gF3QPNULeO&toggle=vis
